@@ -46,8 +46,8 @@ const Card = (article) => {
   imgContainer.appendChild(authorPhoto);
   authorDiv.appendChild(authorName);
 
-  cardWrapper.addEventListener('click', ()=>{
-    console.log(headlineDiv)
+  headlineDiv.addEventListener('click', ()=>{
+    console.log(headlineDiv.textContent)
   })
 
   return cardWrapper;
@@ -58,8 +58,35 @@ const cardAppender = (selector) => {
 
   axios.get(`http://localhost:5000/api/articles`)
   .then(resp =>{
-    const newObj = resp.data.articles;
-    console.log(newObj)
+    // setting a variable equal to the array of objects 
+    const javascriptArticle = resp.data.articles.javascript;
+    const bootStrapArticle = resp.data.articles.bootstrap;
+    const technologyArticle = resp.data.articles.technology;
+    const jQueryArticle = resp.data.articles.jquery;
+    const nodeArticle = resp.data.articles.node;
+
+    // selecting entry point
+    const entryPoint = document.querySelector(selector);
+
+    // iterate through each array
+    javascriptArticle.forEach(item =>{
+      entryPoint.appendChild(Card(item))
+    })
+    bootStrapArticle.forEach(item=>{
+      entryPoint.appendChild(Card(item))
+    })
+    technologyArticle.forEach(item=>{
+      entryPoint.appendChild(Card(item))
+    })
+    jQueryArticle.forEach(item=>{
+      entryPoint.appendChild(Card(item))
+    })
+    nodeArticle.forEach(item=>{
+      entryPoint.appendChild(Card(item))
+    })
+
+    //return 
+    return entryPoint
   })
   .catch(err =>{
     console.log(err)
