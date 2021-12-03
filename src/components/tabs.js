@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const Tabs = (topics) => {
   // TASK 3
   // ---------------------
   // Implement this function which takes an array of strings ("topics") as its only argument.
@@ -14,25 +13,21 @@ const Tabs = (topics) => {
   //   <div class="tab">bootstrap</div>
   //   <div class="tab">technology</div>
   // </div>
-  const topicsDiv = document.createElement('div');
-  const tabDiv1 = document.createElement('div');
-  const tabDiv2 = document.createElement('div');
-  const tabDiv3 = document.createElement('div');
 
+const Tabs = (topics) => {
+  // creating the topics container div
+  const topicsDiv = document.createElement('div'); 
   topicsDiv.classList.add('topics');
-  tabDiv1.classList.add('tab');
-  tabDiv2.classList.add('tab');
-  tabDiv3.classList.add('tab');
 
-  tabDiv1.textContent = topics[0];
-  tabDiv2.textContent = topics[1];
-  tabDiv3.textContent = topics[2];
+  // creating the tabs & appending to the container 
+  for(let i = 0; i < topics.length; i++){
+    let createTab = document.createElement('div');
+    createTab.classList.add('tab');
+    createTab.textContent = topics[i];
+    topicsDiv.appendChild(createTab);
+  }
 
-  topicsDiv.appendChild(tabDiv1);
-  topicsDiv.appendChild(tabDiv2);
-  topicsDiv.appendChild(tabDiv3);
-
-  return topicsDiv;
+  return topicsDiv
 
 }
 
@@ -49,6 +44,7 @@ const tabsAppender = (selector) => {
     const topicsArr = resp.data.topics;
     Tabs(topicsArr)
     const entryPoint = document.querySelector(selector);
+    console.log(topicsArr)
     return entryPoint
   })
   .catch(err =>{
